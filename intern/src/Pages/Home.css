@@ -1,0 +1,97 @@
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #f9f9ff, #e8ecff);
+}
+
+.home-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-image: url("/shopping-doodle.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.home-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-box {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 40px 35px;
+  border-radius: 25px;
+  text-align: center;
+  width: 360px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(10px);
+}
+
+.home-box h2 {
+  font-size: 32px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.home-box p {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 25px;
+}
+
+.home-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  font-weight: 600;
+}
+
+.primary-btn {
+  background: linear-gradient(135deg,black);
+  color: white;
+}
+
+.primary-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(108, 99, 255, 0.3);
+}
+
+.secondary-btn {
+  background: #f3f4f6;
+  color: #333;
+}
+
+.secondary-btn:hover {
+  background: #e5e7eb;
+  transform: translateY(-2px);
+}
+
+.logout-btn {
+  background: linear-gradient(135deg, #ff4d6d, #ff758f);
+  color: white;
+}
+
+.logout-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 77, 109, 0.3);
+}
+
+a {
+  text-decoration: none;
+}
