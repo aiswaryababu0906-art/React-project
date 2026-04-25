@@ -10,12 +10,14 @@ body {
   justify-content: center;
   align-items: center;
 
-  background-image: url("/shopping-doodle.png");
+  background:
+    linear-gradient(rgba(255,255,255,0.65), rgba(255,255,255,0.65)),
+    url("/image-doodle.png.png");
+
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
-
 .home-container {
   height: 100vh;
   display: flex;
