@@ -1,33 +1,43 @@
 import React, { useEffect, useState } from "react";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import "./Cart.css";
 
 function Cart() {
   const [cart, setCart] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("cart")) || [];
+    let data = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // Add quantity if missing
+    data = data.map((item) => ({
+      ...item,
+      quantity: item.quantity || 1,
+    }));
+
+    localStorage.setItem("cart", JSON.stringify(data));
     setCart(data);
   }, []);
 
   const removeItem = (index) => {
-    let cartdata = JSON.parse(localStorage.getItem("cart"));
+    let cartdata = [...cart];
     cartdata.splice(index, 1);
     localStorage.setItem("cart", JSON.stringify(cartdata));
     setCart(cartdata);
   };
 
   const increasequantity = (index) => {
-    let cartdata = JSON.parse(localStorage.getItem("cart"));
-    cartdata[index].quantity += 1;
+    let cartdata = [...cart];
+    cartdata[index].quantity = (cartdata[index].quantity || 1) + 1;
+
     localStorage.setItem("cart", JSON.stringify(cartdata));
     setCart(cartdata);
   };
 
   const decreasequantity = (index) => {
-    let cartdata = JSON.parse(localStorage.getItem("cart"));
-    if (cartdata[index].quantity > 1) {
+    let cartdata = [...cart];
+
+    if ((cartdata[index].quantity || 1) > 1) {
       cartdata[index].quantity -= 1;
       localStorage.setItem("cart", JSON.stringify(cartdata));
       setCart(cartdata);
@@ -37,7 +47,8 @@ function Cart() {
   };
 
   const total = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity,0
+    (sum, item) => sum + item.price * (item.quantity || 1),
+    0
   );
 
   return (
@@ -47,12 +58,12 @@ function Cart() {
       {cart.length === 0 ? (
         <p className="empty-cart">Your cart is empty</p>
       ) : (
-        <div className="cart-grid">
-          {cart.map((item, index) => (
-            <div className="cart-card" key={index}>
-              <img src={item.image} alt={item.title} className="cart-img" />
+        <>
+          <div className="cart-grid">
+            {cart.map((item, index) => (
+              <div className="cart-card" key={index}>
+                <img src={item.image} alt={item.title} className="cart-img" />
 
-              
                 <h4>{item.title}</h4>
                 <p>₹ {item.price}</p>
                 <p>Quantity: {item.quantity}</p>
@@ -60,17 +71,19 @@ function Cart() {
                 <div className="cart-buttons">
                   <button onClick={() => increasequantity(index)}>+</button>
                   <button onClick={() => decreasequantity(index)}>-</button>
-                  <button onClick={() => removeItem(index)}> Remove</button>
+                  <button onClick={() => removeItem(index)}>Remove</button>
                 </div>
               </div>
-          ))}
-            </div>
-          )}
-        
-           <h3>Total Amount: ${total.toFixed(2)}</h3>
-           {cart.length>0 &&(
-            <button onClick={()=>navigate("/checkout")}>Proceed to Checkout</button>
-           )}
+            ))}
+          </div>
+
+          <h3>Total Amount: ₹ {total.toFixed(2)}</h3>
+
+          <button onClick={() => navigate("/checkout")}>
+            Proceed to Checkout
+          </button>
+        </>
+      )}
     </div>
   );
 }
