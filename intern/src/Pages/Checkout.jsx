@@ -1,5 +1,6 @@
 import React,{useState} from "react";
 import { useNavigate} from 'react-router-dom'
+import "./Checkout.css";
 
 function Checkout(){
     const navigate=useNavigate()
@@ -23,7 +24,7 @@ function Checkout(){
         }
     alert('Payment successful!')
     localStorage.removeItem('cart')
-    navigate('/Product')
+    navigate('/Products')
 }
 return(
     <div className='checkout-container'>
